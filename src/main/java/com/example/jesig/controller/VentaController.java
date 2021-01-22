@@ -4,17 +4,14 @@ import com.example.jesig.dao.DetalleVentaDao;
 import com.example.jesig.dao.VentaDao;
 import com.example.jesig.entidades.DetalleVenta;
 import com.example.jesig.entidades.Venta;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Optional;
+
+import com.example.jesig.mapper.ReportesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -29,7 +26,9 @@ public class VentaController {
     private VentaDao ventaDao;
     @Autowired
     private DetalleVentaDao detalleVentaDao;
-    
+    @Autowired
+    private ReportesMapper reportesMapper;
+
     @RequestMapping("/lista")
     public ResponseEntity<List<Venta>> listar(){
         List<Venta> lista = ventaDao.findAll();
@@ -68,10 +67,5 @@ public class VentaController {
         }
        return ResponseEntity.ok(null);
     }
-    
-    @RequestMapping("/reporte-Ganancia")
-    public ResponseEntity<List<HashMap<String,Object>>> reportesGanancia(){
-        List<HashMap<String,Object>> reporte = this.ventaDao.reporteGanacia();
-        return ResponseEntity.ok(reporte);
-    }
+
 }
