@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jesig.mapper.CompraMapper">
+
+   <resultMap id="CompraResult"         type="Compra">
+       <id property="compraId"          column="id"/>
+       <result property="fecha"         column="fecha"/>
+       <collection property="listProducto" ofType="Producto" columnPrefix="pro_" resultMap="com.example.jesig.mapper.ProductoMapper.ProductoResult"/>
+   </resultMap>
+
+    <resultMap id="CompraProductoResult"            type="CompraProducto">
+        <result property="precio"                   column="precio"/>
+        <result property="cantidad"                 column="cantidad"/>
+        <association property="compra"              columnPrefix="com_" resultMap="CompraResult"/>
+        <association property="producto"            columnPrefix="pro_" resultMap="com.example.jesig.mapper.ProductoMapper.ProductoResult"/>
+    </resultMap>
+
+    <select id="">
+
+    </select>
+
+    <insert id="registrarCompra" parameterType="Compra">
+        insert into compra(
+        fecha
+        ) value (
+        #{fecha}     -- fecha          - in date
+        )
+    </insert>
+
+    <insert id="registrarCompraProducto" parameterType="CompraProducto">
+        insert into compra_producto(
+        compra_id,
+        producto_id,
+        precio,
+        cantidad
+        ) value (
+        #{compra.compraId}          -- compra_id    - in int
+        ,#{producto.idProducto}     -- producto_id  - in int
+        ,#{precio}                  -- precio       - in double
+        ,#{cantidad}                -- cantidad     - in int
+        )
+    </insert>
+
+</mapper>

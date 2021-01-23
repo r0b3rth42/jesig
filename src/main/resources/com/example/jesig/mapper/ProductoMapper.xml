@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jesig.mapper.ProductoMapper">
+
+    <resultMap id="ProductoResult"          type="Producto">
+        <id property="idProducto"           column="IDPRODUCTO"/>
+        <result property="codigo"           column="CODIGO"/>
+        <result property="descripcion"      column="DERSCRIPCION"/>
+        <result property="marca"            column="MARCA"/>
+        <result property="stock"            column="STOCK"/>
+        <result property="precioCompra"     column="PRECIOCOMPRA"/>
+        <result property="precioVenta"      column="PRECIOVENTA"/>
+        <result property="foto"             column="FOTO"/>
+    </resultMap>
+
+
+</mapper>
