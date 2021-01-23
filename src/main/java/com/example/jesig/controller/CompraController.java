@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -18,8 +19,8 @@ public class CompraController {
     private CompraService compraService;
 
     @GetMapping(value = "/lista")
-    public ResponseEntity<List<Compra>> lista(){
-        List<Compra> list = compraService.lista();
+    public ResponseEntity<List<HashMap>> lista(){
+        List<HashMap> list = compraService.lista();
         return ResponseEntity.ok(list);
     }
 

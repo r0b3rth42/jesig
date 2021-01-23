@@ -17,8 +17,10 @@
         <association property="producto"            columnPrefix="pro_" resultMap="com.example.jesig.mapper.ProductoMapper.ProductoResult"/>
     </resultMap>
 
-    <select id="">
-
+    <select id="lista" resultType="map">
+        select c.id as compraId, c.fecha, cp.id pro_id from compra c
+        left join compra_producto cp on cp.compra_id = c.id
+        left join producto p on p.IDPRODUCTO = cp.producto_id;
     </select>
 
     <insert id="registrarCompra" parameterType="Compra">

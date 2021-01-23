@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class CompraServiceBean implements CompraService{
@@ -15,7 +16,7 @@ public class CompraServiceBean implements CompraService{
     private CompraMapper compraMapper;
 
     @Override
-    public ArrayList<Compra> lista() {
+    public ArrayList<HashMap> lista() {
         ArrayList listaCompra = compraMapper.lista();
         return listaCompra;
     }

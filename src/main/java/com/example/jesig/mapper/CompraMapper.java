@@ -7,12 +7,13 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Mapper
 public interface CompraMapper {
-    @ResultMap("CompraResult")
-    @Select("select * from compra left join CompraProducto")
-    ArrayList<Compra> lista();
+    //@ResultMap("CompraResult")
+    //@Select("select * from compra c left join compra_producto cp on cp.compra_id = c.id")
+    ArrayList<HashMap> lista();
 
     int registrarCompra(Compra model);
     int registrarCompraProducto(CompraProducto model);
