@@ -23,7 +23,7 @@
         left join producto p on p.IDPRODUCTO = cp.producto_id;
     </select>
 
-    <insert id="registrarCompra" parameterType="Compra">
+    <insert id="registrarCompra" parameterType="Compra" useGeneratedKeys="true" keyProperty="compraId">
         insert into compra(
         fecha
         ) value (
