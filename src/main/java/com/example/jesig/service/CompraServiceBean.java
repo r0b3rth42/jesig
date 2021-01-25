@@ -27,7 +27,9 @@ public class CompraServiceBean implements CompraService{
         if(resultado == 1){
             model.getListProducto().forEach( producto -> {
                 CompraProducto compraProd = new CompraProducto();
-                compraProd.setCompra(model);
+                Compra compra = new Compra();
+                compra.setCompraId(model.getCompraId());
+                compraProd.setCompra(compra);
                 compraProd.setProducto(producto);
                 compraProd.setPrecio(producto.getPrecioVenta());
                 compraProd.setCantidad(producto.getStock());
