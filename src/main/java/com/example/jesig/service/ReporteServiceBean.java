@@ -21,4 +21,9 @@ public class ReporteServiceBean implements  ReporteService{
     public ArrayList<HashMap> obtenerReporteMensual(HashMap map) {
         return reportesMapper.obtenerReporteMensual(map);
     }
+
+    @Override
+    public ArrayList<HashMap> reporteVentasGananciaMensual(int anio) {
+        return reportesMapper.reporteVentasMensual(anio);
+    }
 }

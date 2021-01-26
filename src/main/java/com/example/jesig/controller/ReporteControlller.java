@@ -1,6 +1,5 @@
 package com.example.jesig.controller;
 
-import com.example.jesig.entidades.Venta;
 import com.example.jesig.service.ReporteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +20,12 @@ public class ReporteControlller {
     public ResponseEntity<List<HashMap>> listar(@RequestBody HashMap parametros){
         List<HashMap> lista = reporteService.obtenerReporteMensual(parametros);
         return ResponseEntity.ok(lista);
+    }
+
+    @PostMapping(value = "/venta-ganancia-mensual")
+    public  ResponseEntity<List<HashMap>> ventaGananciaMensual(@RequestBody int anio){
+        List<HashMap> ventasGanancia = reporteService.reporteVentasGananciaMensual(anio);
+        return ResponseEntity.ok(ventasGanancia);
     }
 
 }

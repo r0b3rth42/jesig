@@ -16,4 +16,6 @@ public interface ReportesMapper {
             "\tWHERE MONTH(v.FECHA) = #{mes} AND YEAR(v.FECHA)= #{anio}\n" +
             "\tGROUP BY p.IDPRODUCTO;\t")*/
     ArrayList<HashMap> obtenerReporteMensual(HashMap map);
+
+    ArrayList<HashMap> reporteVentasMensual(int anio);
 }

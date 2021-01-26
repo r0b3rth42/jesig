@@ -8,5 +8,8 @@
         {call sp_reporte_prod_mas_vendido_mensual(#{mes}, #{anio})}
     </select>
 
+    <select id="reporteVentasMensual" statementType = "CALLABLE" parameterType="int" resultType="map">
+        {call sp_reporte_ventas_mensual(#{anio})}
+    </select>
 
 </mapper>
