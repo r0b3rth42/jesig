@@ -8,4 +8,6 @@ public interface ReporteService {
     ArrayList<HashMap> obtenerReporteMensual(HashMap parametros);
 
     ArrayList<HashMap> reporteVentasGananciaMensual(int anio);
+
+    ArrayList<HashMap> ventasAlMes(HashMap map);
 }

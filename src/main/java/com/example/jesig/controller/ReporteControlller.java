@@ -28,4 +28,11 @@ public class ReporteControlller {
         return ResponseEntity.ok(ventasGanancia);
     }
 
+    @PostMapping(value = "/ventas-al-mes")
+    public ResponseEntity<List<HashMap>> ventasAlMes(@RequestBody HashMap map){
+        List<HashMap> ventasAlMes = reporteService.ventasAlMes(map);
+        return ResponseEntity.ok(ventasAlMes);
+    }
+
+
 }

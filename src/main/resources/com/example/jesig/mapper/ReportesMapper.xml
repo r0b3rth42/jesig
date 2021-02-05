@@ -12,4 +12,12 @@
         {call sp_reporte_ventas_mensual(#{anio})}
     </select>
 
+    <select id="ventasAlMes" parameterType="map" resultType="map">
+        select p.CODIGO, p.DESCRIPCION, d.PRECIOFINAL, d.CANTIDAD, DAY(v.FECHA) AS DIA
+            from detalleventa d
+            left join producto p on p.IDPRODUCTO = d.IDPRODUCTO
+            left join venta v on v.IDVENTA =d.IDVENTA
+            where v.FECHA BETWEEN #{fecha1} and #{fecha2};
+    </select>
+
 </mapper>

@@ -18,4 +18,6 @@ public interface ReportesMapper {
     ArrayList<HashMap> obtenerReporteMensual(HashMap map);
 
     ArrayList<HashMap> reporteVentasMensual(int anio);
+
+    ArrayList<HashMap> ventasAlMes(HashMap map);
 }
