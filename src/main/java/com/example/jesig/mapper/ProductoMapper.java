@@ -1,8 +1,13 @@
 package com.example.jesig.mapper;
 
+import com.example.jesig.entidades.Producto;
 import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
-public class ProductoMapper {
+import java.util.List;
 
+@Mapper
+public interface ProductoMapper {
+    List<Producto> lista();
+
+    int registrar(Producto producto);
 }

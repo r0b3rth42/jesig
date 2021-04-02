@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author ZetaGzR
  */
-public interface ProductoDao extends JpaRepository<Producto, Integer>{
+public interface ProductoDao {
     
 }

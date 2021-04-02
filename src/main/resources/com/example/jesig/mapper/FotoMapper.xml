@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jesig.mapper.FotoMapper">
+
+    <resultMap id="FotoResult"                      type="Foto">
+        <result property="fotoId"                   column="foto_id"/>
+        <result property="foto"                     column="foto"/>
+        <association property="producto"            columnPrefix="pro_" resultMap="com.example.jesig.mapper.ProductoMapper.ProductoResult"/>
+    </resultMap>
+
+    <insert id="registrarMasivo" parameterType="java.util.List" >
+        INSERT INTO producto_foto
+        (
+        producto_id
+        ,foto
+        )
+        values
+        (
+        <foreach collection="list" item="e" index="index" separator="),(">
+            #{e.producto.idProducto}
+            ,#{e.foto}
+        </foreach>
+        )
+    </insert>
+
+
+
+</mapper>

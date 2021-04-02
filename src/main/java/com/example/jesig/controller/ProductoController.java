@@ -1,8 +1,9 @@
 package com.example.jesig.controller;
 
+import com.example.jesig.mapper.FotoMapper;
+import com.example.jesig.service.ProductoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.jesig.dao.ProductoDao;
 import com.example.jesig.entidades.Producto;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -33,20 +34,24 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/producto")
 public class ProductoController {
 
+
     @Autowired
-    private ProductoDao productoDao;
+    private ProductoService productoService;
+
+    @Autowired
+    private FotoMapper fotoMapper;
 
     @RequestMapping("lista")
     public ResponseEntity<List<Producto>> getProducto() {
-        List<Producto> lista = productoDao.findAll();
+        List<Producto> lista = productoService.lista();
         return ResponseEntity.ok(lista);
     }
 
     @RequestMapping(value = "{id}")
     public ResponseEntity<Producto> getProductoById(@PathVariable("id") int id) {
-        Optional<Producto> producto = productoDao.findById(id);
-        if (producto.isPresent()) {
-            return ResponseEntity.ok(producto.get());
+        //Optional<Producto> producto = productoDao.findById(id);
+        if (true) {
+            return ResponseEntity.ok(null);
         } else {
             return ResponseEntity.noContent().build();
 
@@ -55,26 +60,30 @@ public class ProductoController {
 
     @PostMapping(value = "registrar")
     public ResponseEntity<Producto> insertarProducto(@RequestBody Producto producto) {            
-        Producto product = productoDao.save(producto);
-        return ResponseEntity.ok(product);
+        int resp = productoService.registrar(producto);
+        if(resp > 0){
+            producto.getListFotos().forEach( f -> f.setProducto(new Producto(producto.getIdProducto())));
+            fotoMapper.registrarMasivo(producto.getListFotos());
+        }
+        return ResponseEntity.ok(producto);
     }
 
     @DeleteMapping(value = "eliminar/{id}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable("id") int id) {
-        productoDao.deleteById(id);
+        //productoDao.deleteById(id);
         return ResponseEntity.ok(null);
     }
 
     @RequestMapping(value = "modificar", method = RequestMethod.PUT)
     public ResponseEntity<Producto> actualizarProducto(@RequestBody Producto producto) {
-        Optional<Producto> optionalProducto = productoDao.findById(producto.getIdProducto());
-        if (optionalProducto.isPresent()) {
-            productoDao.save(producto);
-            return ResponseEntity.ok(producto);
-        } else {
+        //Optional<Producto> optionalProducto = productoDao.findById(producto.getIdProducto());
+        //if (optionalProducto.isPresent()) {
+          //  productoDao.save(producto);
+            //return ResponseEntity.ok(new Producto());
+        //} else {
             return ResponseEntity.notFound().build();
 
-        }
+        //}
     }
 
     private void crearImagen(MultipartFile file, String path) {

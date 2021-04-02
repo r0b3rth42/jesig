@@ -7,13 +7,38 @@
     <resultMap id="ProductoResult"          type="Producto">
         <id property="idProducto"           column="IDPRODUCTO"/>
         <result property="codigo"           column="CODIGO"/>
-        <result property="descripcion"      column="DERSCRIPCION"/>
+        <result property="descripcion"      column="DESCRIPCION"/>
         <result property="marca"            column="MARCA"/>
         <result property="stock"            column="STOCK"/>
         <result property="precioCompra"     column="PRECIOCOMPRA"/>
         <result property="precioVenta"      column="PRECIOVENTA"/>
         <result property="foto"             column="FOTO"/>
+        <collection property="listFotos" javaType="ArrayList" columnPrefix="fot_" column="id" ofType="Foto" resultMap="com.example.jesig.mapper.FotoMapper.FotoResult"/>
     </resultMap>
 
+    <select id="lista" resultMap="ProductoResult">
+        select p.IDPRODUCTO, p.CODIGO, p.DESCRIPCION, p.MARCA, p.STOCK, p.PRECIOCOMPRA, p.PRECIOVENTA, p.FOTO,
+        pf.id as fot_foto_id, pf.producto_id as fot_pro_IDPRODUCTO, pf.foto as fot_foto
+        from producto p
+        inner join producto_foto pf on pf.producto_id = p.IDPRODUCTO
+    </select>
+
+    <insert id="registrar" parameterType="Producto" useGeneratedKeys="true" keyProperty="idProducto" keyColumn="IDPRODUCTO">
+        insert into producto(
+        CODIGO,
+        DESCRIPCION,
+        MARCA,
+        STOCK,
+        PRECIOCOMPRA,
+        PRECIOVENTA
+        ) value (
+        #{codigo}          -- compra_id    - in int
+        ,#{descripcion}     -- producto_id  - in int
+        ,#{marca}                  -- precio       - in double
+        ,#{stock}                -- cantidad     - in int
+        ,#{precioCompra}
+        ,#{precioVenta}
+        )
+    </insert>
 
 </mapper>
